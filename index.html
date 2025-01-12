@@ -4,6 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hi Airaaaa</title>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-analytics.js"></script>
     <style>
         /* General body styling */
         body {
@@ -151,11 +154,45 @@
     <!-- Content container -->
     <div class="container">
         <h1>If gusto mo talaga ako makilala, click thiz link (IG ko yan)</h1>
-        <a href="https://www.instagram.com/ikinamadarren/" target="_blank">Visit Instagram</a>
+        <a href="https://www.instagram.com/ikinamadarren/" target="_blank" onclick="incrementInstagramClick()">Visit Instagram</a>
     </div>
 
     <script>
-        // Create falling hearts dynamically
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCQgHaRHx45IQjJmMo7sQCN2is9K6Uw07w",
+            authDomain: "letter-to-aira.firebaseapp.com",
+            databaseURL: "https://letter-to-aira-default-rtdb.asia-southeast1.firebasedatabase.app/",
+            projectId: "letter-to-aira",
+            storageBucket: "letter-to-aira.firebasestorage.app",
+            messagingSenderId: "112210370624",
+            appId: "1:112210370624:web:70e6ea30ef988ac76d3fa5",
+            measurementId: "G-DVBN9HMS0K"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
+        // Track page visits
+        const visitsRef = database.ref('visits');
+        visitsRef.transaction(function(currentData) {
+            const updatedCount = (currentData || 0) + 1;
+            console.log("Updated visits count:", updatedCount); // Check updated count in console
+            return updatedCount;
+        });
+
+        // Track Instagram clicks
+        function incrementInstagramClick() {
+            const instagramClicksRef = database.ref('instagramClicks');
+            instagramClicksRef.transaction(function(currentData) {
+                const updatedClickCount = (currentData || 0) + 1;
+                console.log("Updated Instagram click count:", updatedClickCount); // Check updated click count in console
+                return updatedClickCount;
+            });
+        }
+
+        // Falling hearts animation
         const fallingHearts = document.querySelector('.falling-hearts');
         for (let i = 0; i < 30; i++) { // Adjusted number of hearts
             const heart = document.createElement('div');
