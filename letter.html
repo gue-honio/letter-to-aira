@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hi Airaaaa</title>
+    <style>
+        /* General body styling */
+        body {
+            margin: 0;
+            font-family: 'Poppins', Arial, sans-serif;
+            background: linear-gradient(to bottom right, #ff9a9e, #fecfef);
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Card container */
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            max-width: 450px;
+            width: 90%;
+            position: relative;
+            z-index: 2;
+            animation: fadeIn 1s ease-out;
+        }
+
+        /* Heading styling */
+        h1 {
+            font-size: 2rem;
+            color: #ff4b6e;
+            margin-bottom: 2rem;
+            font-weight: bold;
+            line-height: 1.5;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Link styling */
+        a {
+            text-decoration: none;
+            color: white;
+            background: linear-gradient(45deg, #ff4b6e, #ff80b0);
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1rem;
+            display: inline-block;
+            box-shadow: 0 6px 15px rgba(255, 105, 135, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        /* Hover effects for the link */
+        a:hover {
+            background: linear-gradient(45deg, #ff2f5d, #ff66a8);
+            transform: scale(1.1);
+            box-shadow: 0 10px 25px rgba(255, 105, 135, 0.5);
+        }
+
+        /* Falling hearts container */
+        .falling-hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Individual heart shape */
+        .heart {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: #ff4b6e;
+            transform: rotate(45deg);
+            animation: fall 5s linear infinite, sway 3s ease-in-out infinite;
+            opacity: 0.7;
+        }
+
+        /* Heart shape using :before pseudo-element */
+        .heart:before {
+            content: "";
+            position: absolute;
+            top: -12px;
+            left: 0;
+            width: 30px;
+            height: 30px;
+            background-color: #ff4b6e;
+            border-radius: 50%;
+        }
+
+        /* Falling animation */
+        @keyframes fall {
+            0% {
+                transform: translateY(-100%) rotate(45deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(45deg);
+                opacity: 0;
+            }
+        }
+
+        /* Sway animation for horizontal movement */
+        @keyframes sway {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(30px);
+            }
+        }
+
+        /* Fade-in animation for the container */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 500px) {
+            h1 {
+                font-size: 1.6rem;
+            }
+
+            a {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Falling hearts container -->
+    <div class="falling-hearts"></div>
+
+    <!-- Content container -->
+    <div class="container">
+        <h1>If gusto mo talaga ako makilala, click thiz link (IG ko yan)</h1>
+        <a href="https://www.instagram.com/ikinamadarren/" target="_blank">Visit Instagram</a>
+    </div>
+
+    <script>
+        // Create falling hearts dynamically
+        const fallingHearts = document.querySelector('.falling-hearts');
+        for (let i = 0; i < 30; i++) { // Adjusted number of hearts
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.style.left = Math.random() * 100 + 'vw'; // Random left position
+            heart.style.animationDuration = Math.random() * 3 + 3 + 's'; // Random falling speed
+            heart.style.animationDelay = Math.random() * 5 + 's'; // Random delay before starting
+            heart.style.opacity = Math.random(); // Random opacity
+            fallingHearts.appendChild(heart);
+        }
+    </script>
+</body>
+</html>
